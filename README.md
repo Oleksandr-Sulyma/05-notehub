@@ -1,73 +1,139 @@
-# React + TypeScript + Vite
+# 📝 NoteHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Простий застосунок для створення, збереження, видалення та пошуку нотаток, створений за допомогою **React + TypeScript + Vite**.
 
-Currently, two official plugins are available:
+Користувач може створювати нотатки через модальне вікно, шукати їх за текстом, переглядати список та видаляти непотрібні нотатки.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Демо
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+🔗 **Live Demo:** [https://05-notehub-nmp88has2-3280673s-projects.vercel.app/](https://05-notehub-nmp88has2-3280673s-projects.vercel.app/)  
+🔗 **GitHub Репозиторій:** [https://github.com/Oleksandr-Sulyma/05-notehub](https://github.com/Oleksandr-Sulyma/05-notehub)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🧩 Технології
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- ⚛️ **React 18**
+- 🧠 **TypeScript**
+- ⚡ **Vite**
+- 🎨 **CSS Modules**
+- 🔥 **axios** (для HTTP-запитів до API)
+- 📊 **@tanstack/react-query** (для управління станом даних та кешування)
+- ⏳ **use-debounce** (для відкладеного пошуку)
+- ✅ **Formik + Yup** (для форм та валідації)
+- 🌐 **modern-normalize** (уніфікація стилів у браузерах)
+- 🖼️ **React Portal** (для модального вікна)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📂 Структура Проєкту
+
+```bash
+src/
+├── components/
+│   ├── App/
+│   │   ├── App.tsx
+│   │   └── App.module.css
+│   ├── NoteList/
+│   │   ├── NoteList.tsx
+│   │   └── NoteList.module.css
+│   ├── NoteForm/
+│   │   ├── NoteForm.tsx
+│   │   └── NoteForm.module.css
+│   ├── SearchBox/
+│   │   ├── SearchBox.tsx
+│   │   └── SearchBox.module.css
+│   ├── Pagination/
+│   │   ├── Pagination.tsx
+│   │   └── Pagination.module.css
+│   ├── Modal/
+│   │   ├── Modal.tsx
+│   │   └── Modal.module.css
+│   ├── Loader/
+│   │   ├── Loader.tsx
+│   │   └── Loader.module.css
+│   └── ErrorMessage/
+│       ├── ErrorMessage.tsx
+│       └── ErrorMessage.module.css
+├── hooks/
+│   └── useModalControl.ts
+├── services/
+│   └── noteService.ts
+├── types/
+│   └── note.ts
+├── main.tsx
+└── index.css
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ⚙️ Налаштування Локально
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1. Клонування репозиторію
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/Oleksandr-Sulyma/05-notehub
+cd 05-notehub
 ```
+
+### 2. Встановлення залежностей
+
+```bash
+npm install
+```
+
+### 3. Створення `.env` файлу (Конфігурація API)
+
+У корені проєкту створіть файл `.env` і додайте свій токен доступу:
+
+```env
+VITE_NOTEHUB_TOKEN=your_personal_token
+```
+
+> 👉 **Увага:** Токен використовується у заголовку Authorization як \*Bearer ваш_токен.\*\*
+
+### 4. Запуск локально
+
+```bash
+npm run dev
+```
+
+Відкрийте у браузері: `http://localhost:5173`
+
+---
+
+## 🧱 Скріпти
+
+| Команда           | Опис                                    |
+| :---------------- | :-------------------------------------- |
+| `npm run dev`     | Запуск у режимі розробки                |
+| `npm run build`   | Збірка проєкту для продакшену           |
+| `npm run preview` | Локальний перегляд зібраного застосунку |
+
+---
+
+## 💡 Основна Функціональність
+
+- ✅ Пошук нотаток за текстом з відкладеним запитом
+- ✅ Створення нової нотатки через модальне вікно
+- ✅ Видалення нотаток
+- ✅ Пагінація списку нотаток
+- ✅ Повідомлення при відсутності нотаток
+- ✅ Індикатори завантаження та обробка помилок
+- ✅ Валідація форми через Formik + Yu
+- ✅ Управління станом та кешування через React Query
+- ✅ Типізація TypeScript (пропси та загальні типи в types/note.ts)
+
+---
+
+## 🧑‍💻 Автор
+
+**Олександр Сулима**
+
+- 🔗 GitHub Профіль: [Oleksandr-Sulyma](https://github.com/Oleksandr-Sulyma)
+
+---
+
+## 📜 Ліцензія
+
+Проєкт створений у навчальних цілях.

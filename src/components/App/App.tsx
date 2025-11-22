@@ -13,12 +13,13 @@ import Loader from "@/components/Loader/Loader";
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 import NoNotesMessage from "@/components/NoNotesMessage/NoNotesMessage";
 
-
 import { fetchNotes, createNote } from "@/services/noteService";
 import useModalControl from "@/hooks/useModalControl";
-import type { FetchNotesParams, FetchNotesResponse } from "@/services/noteService";
+import type {
+  FetchNotesParams,
+  FetchNotesResponse,
+} from "@/services/noteService";
 import type { NoteFormValues } from "@/types/note";
-
 
 export default function App() {
   const createNoteModal = useModalControl();
@@ -30,11 +31,14 @@ export default function App() {
     sortBy: "created",
   });
 
- const { data, isLoading, isSuccess, isError } = useQuery<FetchNotesResponse, Error>({
-  queryKey: ["notes", params.search, params.sortBy, params.page],
-  queryFn: () => fetchNotes(params),
-  staleTime: 5000,
-});
+  const { data, isLoading, isSuccess, isError } = useQuery<
+    FetchNotesResponse,
+    Error
+  >({
+    queryKey: ["notes", params.search, params.sortBy, params.page],
+    queryFn: () => fetchNotes(params),
+    staleTime: 5000,
+  });
 
   const mutation = useMutation({
     mutationFn: (note: NoteFormValues) => createNote(note),
@@ -67,16 +71,11 @@ export default function App() {
           <Pagination
             currentPage={params.page ?? 1}
             totalPages={data.totalPages}
-            onPageChange={(page) =>
-              setParams((prev) => ({ ...prev, page }))
-            }
+            onPageChange={(page) => setParams((prev) => ({ ...prev, page }))}
           />
         )}
 
-        <button
-          className={css.button}
-          onClick={createNoteModal.openModal}
-        >
+        <button className={css.button} onClick={createNoteModal.openModal}>
           Create note +
         </button>
       </header>
@@ -84,13 +83,16 @@ export default function App() {
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
       {isSuccess && data?.notes.length === 0 && (
-  <NoNotesMessage isSearch={params.search.length > 0} />
-)}
+        <NoNotesMessage isSearch={params.search.length > 0} />
+      )}
       {data && !isLoading && <NoteList notes={data.notes} />}
 
       {createNoteModal.isModalOpen && (
         <Modal onClose={createNoteModal.closeModal}>
-          <NoteForm onSubmit={handleCreateNote} onClose={createNoteModal.closeModal} />
+          <NoteForm
+            onSubmit={handleCreateNote}
+            onClose={createNoteModal.closeModal}
+          />
         </Modal>
       )}
     </div>
