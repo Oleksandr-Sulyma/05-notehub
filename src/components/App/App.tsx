@@ -2,7 +2,12 @@ import css from "./App.module.css";
 
 import React, { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import {
+  useQuery,
+  useQueryClient,
+  useMutation,
+  keepPreviousData,
+} from "@tanstack/react-query";
 
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
@@ -37,7 +42,8 @@ export default function App() {
   >({
     queryKey: ["notes", params.search, params.sortBy, params.page],
     queryFn: () => fetchNotes(params),
-    staleTime: 5000,
+    placeholderData: keepPreviousData,
+    staleTime: 1000 * 60 * 5,
   });
 
   const mutation = useMutation({

@@ -64,7 +64,7 @@ export default function NoteForm({ onSubmit, onClose }: NoteFormProps) {
           <ErrorMessage
             name="title"
             component="div"
-            className={css.errorMessage}
+            className={css.error}
           />
         </div>
 
@@ -80,7 +80,7 @@ export default function NoteForm({ onSubmit, onClose }: NoteFormProps) {
           <ErrorMessage
             name="content"
             component="div"
-            className={css.errorMessage}
+            className={css.error}
           />
         </div>
 
@@ -101,7 +101,7 @@ export default function NoteForm({ onSubmit, onClose }: NoteFormProps) {
           <ErrorMessage
             name="tag"
             component="div"
-            className={css.errorMessage}
+            className={css.error}
           />
         </div>
 
